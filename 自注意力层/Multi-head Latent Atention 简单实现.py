@@ -128,7 +128,7 @@ class MLAAttention(nn.Module):
         output = torch.matmul(scores, v_t_c) #[:,:,seq,32]
 
         print(output.shape)
-        output = output.transpose(1,2).reshape(bs,seq_len,-1)
+        output = output.transpose(1,2).reshape(bs,seq_len,-1) # 等价与contiguous和view的组合
         output = self.fc(output)
         output = self.res_dropout(output)
         return output
